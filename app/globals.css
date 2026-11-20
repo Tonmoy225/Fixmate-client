@@ -1,28 +1,87 @@
-
 @import "tailwindcss";
-@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@plugin "daisyui" {
+  themes: false;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* FixMate theme: navy + orange */
+@plugin "daisyui/theme" {
+  name: "fixmate";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: #ffffff;
+  --color-base-200: #f8fafc;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #0f172a;
+
+  --color-primary: #f97316;
+  --color-primary-content: #ffffff;
+  --color-secondary: #0f172a;
+  --color-secondary-content: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-content: #ffffff;
+  --color-neutral: #0f172a;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #2563eb;
+  --color-info-content: #ffffff;
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #ffffff;
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-jakarta), sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Same page width on every page */
+.container-page {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Same heading style on every section */
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
+}
+
+.section-subtitle {
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  color: #64748b;
+}
+
+/* Same primary button style everywhere */
+.btn-fixmate {
+  background-color: #f97316;
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+}
+
+.btn-fixmate:hover {
+  background-color: #ea580c;
 }
