@@ -4,7 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import { authClient } from "@/lib/auth-client";
 import Logo from "./Logo";
+import UserMenu from "./UserMenu";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -15,6 +17,8 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
 
   const isActive = (href) => {
     if (href === "/") return pathname === "/";
@@ -40,26 +44,32 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop buttons */}
-        <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/sign-in"
-            className="btn btn-outline border-white text-white hover:bg-white hover:text-secondary"
-          >
-            Sign In
-          </Link>
-          <Link href="/sign-up" className="btn btn-fixmate">
-            Sign Up
-          </Link>
-        </div>
+        <div className="flex items-center gap-3">
+          {/* লগইন থাকলে avatar, না থাকলে বাটন (desktop) */}
+          {!isPending && user && <UserMenu user={user} />}
 
-        {/* Mobile hamburger */}
-        <button
-          className="text-3xl text-white md:hidden"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <HiX /> : <HiMenu />}
-        </button>
+          {!isPending && !user && (
+            <div className="hidden items-center gap-3 md:flex">
+              <Link
+                href="/sign-in"
+                className="btn btn-outline border-white text-white hover:bg-white hover:text-secondary"
+              >
+                Sign In
+              </Link>
+              <Link href="/sign-up" className="btn btn-fixmate">
+                Sign Up
+              </Link>
+            </div>
+          )}
+
+          {/* Mobile hamburger */}
+          <button
+            className="text-3xl text-white md:hidden"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <HiX /> : <HiMenu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -76,22 +86,25 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <div className="flex gap-3">
-              <Link
-                href="/sign-in"
-                className="btn btn-outline flex-1 border-white text-white hover:bg-white hover:text-secondary"
-                onClick={() => setOpen(false)}
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/sign-up"
-                className="btn btn-fixmate flex-1"
-                onClick={() => setOpen(false)}
-              >
-                Sign Up
-              </Link>
-            </div>
+
+            {!isPending && !user && (
+              <div className="flex gap-3">
+                <Link
+                  href="/sign-in"
+                  className="btn btn-outline flex-1 border-white text-white hover:bg-white hover:text-secondary"
+                  onClick={() => setOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="btn btn-fixmate flex-1"
+                  onClick={() => setOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
