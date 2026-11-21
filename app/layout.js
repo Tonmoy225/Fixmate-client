@@ -1,4 +1,5 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -15,7 +16,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="fixmate">
-      <body className={jakarta.variable}>{children}</body>
+      <body className={jakarta.variable}>
+        {children}
+        <Toaster position="top-center" />
+      </body>
     </html>
   );
 }
