@@ -4,10 +4,10 @@
 
 ## Live URLs
 
-- Live Site: YOUR_CLIENT_LIVE_URL
-- Client Repository: YOUR_CLIENT_GITHUB_URL
-- Server Repository: YOUR_SERVER_GITHUB_URL
-- Server API: YOUR_SERVER_LIVE_URL
+- Live Site: [CLIENT_LIVE_URL](https://fixmate-client-iota.vercel.app/)
+- Client Repository: [CLIENT_GITHUB_URL](https://github.com/Tonmoy225/Fixmate-client)
+- Server Repository: [SERVER_GITHUB_URL](https://github.com/Tonmoy225/fixmate-server)
+- Server API: [SERVER_LIVE_URL](https://fixmate-server-beta.vercel.app/)
 
 ## Test Accounts
 
