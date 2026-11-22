@@ -12,13 +12,11 @@ function SuccessContent() {
   const sessionId = searchParams.get("session_id");
 
   const [payment, setPayment] = useState(null);
-  const [error, setError] = useState("");
+  const [apiError, setApiError] = useState("");
 
   useEffect(() => {
-    if (!sessionId) {
-      setError("Payment session not found");
-      return;
-    }
+    // session_id না থাকলে verify করার কিছু নেই
+    if (!sessionId) return;
 
     // server Stripe-এ যাচাই করে payment save করে (বারবার ডাকলেও একবারই save হয়)
     apiFetch(`/api/payments/verify?session_id=${sessionId}`)
@@ -26,16 +24,24 @@ function SuccessContent() {
         setPayment(data);
         toast.success("Payment successful!");
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => setApiError(err.message));
   }, [sessionId]);
+
+  // session_id না থাকার error render-এর সময় হিসাব হয়, state-এ রাখতে হয় না
+  const error = !sessionId ? "Payment session not found" : apiError;
 
   if (error) {
     return (
       <div className="mx-auto max-w-md rounded-2xl bg-white p-8 text-center shadow-lg">
         <FaTimesCircle className="mx-auto text-6xl text-error" />
-        <h1 className="mt-4 text-2xl font-extrabold">Could not verify payment</h1>
+        <h1 className="mt-4 text-2xl font-extrabold">
+          Could not verify payment
+        </h1>
         <p className="mt-2 text-slate-500">{error}</p>
-        <Link href="/dashboard/customer/bookings" className="btn btn-fixmate mt-6">
+        <Link
+          href="/dashboard/customer/bookings"
+          className="btn btn-fixmate mt-6"
+        >
           Back to My Bookings
         </Link>
       </div>
@@ -46,7 +52,9 @@ function SuccessContent() {
     return (
       <div className="flex flex-col items-center gap-4 py-20">
         <span className="loading loading-spinner loading-lg text-primary"></span>
-        <p className="font-semibold text-slate-500">Confirming your payment...</p>
+        <p className="font-semibold text-slate-500">
+          Confirming your payment...
+        </p>
       </div>
     );
   }
@@ -64,7 +72,9 @@ function SuccessContent() {
         </div>
         <div className="flex justify-between gap-4">
           <span className="text-slate-500">Amount</span>
-          <span className="font-extrabold text-green-600">${payment.amount}</span>
+          <span className="font-extrabold text-green-600">
+            ${payment.amount}
+          </span>
         </div>
         <div className="flex justify-between gap-4">
           <span className="text-slate-500">Transaction ID</span>
@@ -74,7 +84,10 @@ function SuccessContent() {
         </div>
       </div>
 
-      <Link href="/dashboard/customer/bookings" className="btn btn-fixmate mt-6 w-full">
+      <Link
+        href="/dashboard/customer/bookings"
+        className="btn btn-fixmate mt-6 w-full"
+      >
         Back to My Bookings
       </Link>
     </div>

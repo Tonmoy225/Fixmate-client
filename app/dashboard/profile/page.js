@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
@@ -12,30 +12,10 @@ const roleBadgeClass = {
   admin: "bg-purple-100 text-purple-700",
 };
 
+// বাইরের অংশ: user আসা পর্যন্ত অপেক্ষা করে
 export default function ProfilePage() {
-  const router = useRouter();
   const { data: session, isPending, refetch } = authClient.useSession();
   const user = session?.user;
-
-  const [form, setForm] = useState({ name: "", phone: "", area: "", bio: "" });
-  const [loaded, setLoaded] = useState(false);
-  const [imageFile, setImageFile] = useState(null);
-  const [preview, setPreview] = useState("");
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  // user আসার পর form-এ বর্তমান তথ্য বসানো (একবারই)
-  useEffect(() => {
-    if (user && !loaded) {
-      setForm({
-        name: user.name || "",
-        phone: user.phone || "",
-        area: user.area || "",
-        bio: user.bio || "",
-      });
-      setLoaded(true);
-    }
-  }, [user, loaded]);
 
   if (isPending || !user) {
     return (
@@ -44,6 +24,24 @@ export default function ProfilePage() {
       </div>
     );
   }
+
+  return <ProfileForm user={user} refetch={refetch} />;
+}
+
+// ভেতরের অংশ: user পেয়ে গেছে, তাই form সরাসরি তার মান দিয়ে শুরু হয় (effect লাগে না)
+function ProfileForm({ user, refetch }) {
+  const router = useRouter();
+
+  const [form, setForm] = useState({
+    name: user.name || "",
+    phone: user.phone || "",
+    area: user.area || "",
+    bio: user.bio || "",
+  });
+  const [imageFile, setImageFile] = useState(null);
+  const [preview, setPreview] = useState("");
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const role = user.role || "customer";
   const currentImage = preview || user.image;
