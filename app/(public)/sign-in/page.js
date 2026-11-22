@@ -5,6 +5,7 @@ import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import GoogleAuthButton from "@/components/GoogleAuthButton";
 
 function SignInForm() {
   const router = useRouter();
@@ -74,6 +75,14 @@ function SignInForm() {
         <p className="mb-6 mt-1 text-center text-slate-500">
           Sign in to manage your repair jobs
         </p>
+
+        <GoogleAuthButton flow="signin" redirect={redirect} />
+
+        <div className="my-5 flex items-center gap-3">
+          <span className="h-px flex-1 bg-base-300" />
+          <span className="text-xs font-semibold uppercase text-slate-400">or</span>
+          <span className="h-px flex-1 bg-base-300" />
+        </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {/* Email */}

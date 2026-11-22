@@ -6,6 +6,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaUser, FaWrench } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
+import GoogleAuthButton from "@/components/GoogleAuthButton";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -85,6 +86,18 @@ export default function SignUpPage() {
         <p className="mb-6 mt-1 text-center text-slate-500">
           Join FixMate as a customer or a technician
         </p>
+
+        <GoogleAuthButton flow="signup" label="Sign up with Google" />
+
+        <p className="mt-2 text-center text-xs text-slate-500">
+          New Google accounts start as customers.
+        </p>
+
+        <div className="my-5 flex items-center gap-3">
+          <span className="h-px flex-1 bg-base-300" />
+          <span className="text-xs font-semibold uppercase text-slate-400">or</span>
+          <span className="h-px flex-1 bg-base-300" />
+        </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {/* Role selection */}
