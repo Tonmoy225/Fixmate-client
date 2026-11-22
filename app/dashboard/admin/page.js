@@ -15,7 +15,10 @@ export default function AdminOverview() {
   useEffect(() => {
     apiFetch("/api/admin/stats")
       .then(setStats)
-      .catch(setStats({ totalUsers: 0, totalTechnicians: 0, pendingServices: 0, bookingsByStatus: {} }));
+      .catch(() => {
+        toast.error("Failed to load stats");
+        setStats({ totalUsers: 0, totalTechnicians: 0, pendingServices: 0, bookingsByStatus: {} });
+      });
   }, []);
 
   if (!stats) {
@@ -36,6 +39,8 @@ export default function AdminOverview() {
         <StatsCard title="Total Technicians" value={stats.totalTechnicians} icon={<MdEngineering />} color="bg-orange-500" />
         <StatsCard title="Pending Services" value={stats.pendingServices} icon={<MdPendingActions />} color="bg-amber-500" />
       </div>
+
+      <BookingsChart bookingsByStatus={stats.bookingsByStatus} />
     </div>
   );
 }
