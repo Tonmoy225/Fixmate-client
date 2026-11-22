@@ -1,10 +1,16 @@
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Russo_One } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
+});
+
+const russo = Russo_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-brand",
 });
 
 export const metadata = {
@@ -16,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="fixmate">
-      <body className={jakarta.variable}>
+      <body className={`${jakarta.variable} ${russo.variable}`}>
         {children}
         <Toaster position="top-center" />
       </body>
