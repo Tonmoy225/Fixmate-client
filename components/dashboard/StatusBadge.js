@@ -38,3 +38,18 @@ export function PaymentBadge({ paymentStatus }) {
     </span>
   );
 }
+const approvalStyle = {
+  pending: "bg-amber-100 text-amber-700",
+  approved: "bg-green-100 text-green-700",
+  rejected: "bg-red-100 text-red-700",
+};
+
+export function ApprovalBadge({ approvalStatus }) {
+  return (
+    <span
+      className={`inline-block rounded-full px-3 py-1 text-xs font-semibold capitalize ${approvalStyle[approvalStatus]}`}
+    >
+      {approvalStatus}
+    </span>
+  );
+}
