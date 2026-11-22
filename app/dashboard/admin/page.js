@@ -4,10 +4,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdPeople, MdEngineering, MdPendingActions } from "react-icons/md";
 import StatsCard from "@/components/dashboard/StatsCard";
-import { apiFetch } from "@/lib/api";
-
-
 import BookingsChart from "@/components/dashboard/BookingsChart";
+import { apiFetch } from "@/lib/api";
 
 export default function AdminOverview() {
   const [stats, setStats] = useState(null);
@@ -15,9 +13,14 @@ export default function AdminOverview() {
   useEffect(() => {
     apiFetch("/api/admin/stats")
       .then(setStats)
-      .catch(() => {
-        toast.error("Failed to load stats");
-        setStats({ totalUsers: 0, totalTechnicians: 0, pendingServices: 0, bookingsByStatus: {} });
+      .catch((error) => {
+        toast.error(error.message);
+        setStats({
+          totalUsers: 0,
+          totalTechnicians: 0,
+          pendingServices: 0,
+          bookingsByStatus: {},
+        });
       });
   }, []);
 

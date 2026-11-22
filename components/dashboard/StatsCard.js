@@ -1,8 +1,6 @@
 export default function StatsCard({ title, value, icon, color = "bg-primary" }) {
   return (
     <div className="flex items-center gap-4 rounded-2xl bg-white p-6 shadow-md">
-
-        <BookingsChart bookingsByStatus={stats.bookingsByStatus} />
       <span
         className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-2xl text-white ${color}`}
       >
