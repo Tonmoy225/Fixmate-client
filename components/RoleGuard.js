@@ -1,15 +1,28 @@
-import { redirect } from "next/navigation";
-import { getSession } from "@/lib/session";
+"use client";
 
-export default async function RoleGuard({ role, children }) {
-  const session = await getSession();
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import PageLoader from "./PageLoader";
 
-  if (!session) redirect("/sign-in");
+export default function RoleGuard({ role, children }) {
+  const router = useRouter();
+  const { data, isPending } = authClient.useSession();
+  const user = data?.user;
+  const userRole = user?.role || "customer";
 
-  const userRole = session.user.role || "customer";
+  useEffect(() => {
+    if (isPending) return;
 
-  if (userRole !== role) {
-    redirect(`/dashboard/${userRole}`);
+    if (!user) {
+      router.replace("/sign-in");
+    } else if (userRole !== role) {
+      router.replace(`/dashboard/${userRole}`);
+    }
+  }, [isPending, user, userRole, role, router]);
+
+  if (isPending || !user || userRole !== role) {
+    return <PageLoader />;
   }
 
   return children;

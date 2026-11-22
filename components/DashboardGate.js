@@ -1,19 +1,24 @@
-import { redirect } from "next/navigation";
-import { getSession } from "@/lib/session";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 import DashboardShell from "./DashboardShell";
+import PageLoader from "./PageLoader";
 
-export default async function DashboardGate({ children }) {
-  const session = await getSession();
+export default function DashboardGate({ children }) {
+  const router = useRouter();
+  const { data, isPending } = authClient.useSession();
+  const user = data?.user;
 
-  // cookie থাকলেও session সত্যি valid না হলে sign-in এ
-  if (!session) redirect("/sign-in");
+  // session না থাকলে sign-in এ
+  useEffect(() => {
+    if (!isPending && !user) router.replace("/sign-in");
+  }, [isPending, user, router]);
 
-  const user = {
-    name: session.user.name,
-    email: session.user.email,
-    image: session.user.image || null,
-    role: session.user.role || "customer",
-  };
+  if (isPending || !user) {
+    return <PageLoader />;
+  }
 
   return <DashboardShell user={user}>{children}</DashboardShell>;
 }
