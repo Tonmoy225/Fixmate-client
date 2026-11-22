@@ -1,5 +1,6 @@
 "use client";
 
+import PageLoader from "@/components/PageLoader";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { StatusBadge, PaymentBadge } from "@/components/dashboard/StatusBadge";
@@ -62,9 +63,7 @@ export default function AdminBookingsPage() {
       </div>
 
       {!bookings ? (
-        <div className="flex justify-center py-20">
-          <span className="loading loading-spinner loading-lg text-primary"></span>
-        </div>
+        <PageLoader />
       ) : bookings.length === 0 ? (
         <div className="rounded-2xl bg-white py-16 text-center shadow-md">
           <p className="text-2xl font-bold">No bookings found</p>

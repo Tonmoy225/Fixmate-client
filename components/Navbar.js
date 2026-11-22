@@ -8,6 +8,9 @@ import { authClient } from "@/lib/auth-client";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
 
+
+import ThemeToggle from "./ThemeToggle";
+
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
@@ -45,6 +48,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+                    <ThemeToggle />
           {/* লগইন থাকলে avatar, না থাকলে বাটন (desktop) */}
           {!isPending && user && <UserMenu user={user} />}
 

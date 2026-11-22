@@ -1,5 +1,6 @@
 "use client";
 
+import PageLoader from "@/components/PageLoader";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -21,9 +22,7 @@ export default function PaymentHistoryPage() {
 
   if (!payments) {
     return (
-      <div className="flex justify-center py-20">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
+      <PageLoader />
     );
   }
 

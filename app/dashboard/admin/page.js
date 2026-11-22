@@ -1,5 +1,6 @@
 "use client";
 
+import PageLoader from "@/components/PageLoader";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdPeople, MdEngineering, MdPendingActions } from "react-icons/md";
@@ -26,9 +27,7 @@ export default function AdminOverview() {
 
   if (!stats) {
     return (
-      <div className="flex justify-center py-20">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
+      <PageLoader />
     );
   }
 

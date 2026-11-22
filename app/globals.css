@@ -42,12 +42,56 @@
   --depth: 0;
   --noise: 0;
 }
+/* Night theme */
+@plugin "daisyui/theme" {
+  name: "fixmate-dark";
+  default: false;
+  color-scheme: dark;
 
+  --color-base-100: #111c33;
+  --color-base-200: #0b1224;
+  --color-base-300: #243352;
+  --color-base-content: #e2e8f0;
+
+  --color-primary: #f97316;
+  --color-primary-content: #ffffff;
+  --color-secondary: #1e1b4b;
+  --color-secondary-content: #ffffff;
+  --color-accent: #6366f1;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1e293b;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+  --color-success: #22c55e;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #ffffff;
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
 /* Base */
 body {
   font-family: var(--font-jakarta), sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff7ed 0%, #f8fafc 45%, #eff6ff 100%);
+  background-attachment: fixed;
+  color: var(--color-base-content);
+}
+
+[data-theme="fixmate-dark"] body {
+  background: linear-gradient(135deg, #0b1224 0%, #1a1740 50%, #0b1224 100%);
+  background-attachment: fixed;
 }
 
 /* Same page width on every page */
@@ -63,7 +107,7 @@ body {
 .section-title {
   font-size: 2rem;
   font-weight: 800;
-  color: #0f172a;
+    color: var(--color-base-content);
   text-align: center;
 }
 
@@ -110,4 +154,116 @@ body {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cmask id='m' maskUnits='userSpaceOnUse' x='0' y='0' width='100' height='100'%3E%3Crect width='100' height='100' fill='white'/%3E%3Ccircle cx='50' cy='50' r='13' fill='black'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)' fill='black'%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4' transform='rotate(45 50 50)'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4' transform='rotate(90 50 50)'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4' transform='rotate(135 50 50)'/%3E%3C/g%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cmask id='m' maskUnits='userSpaceOnUse' x='0' y='0' width='100' height='100'%3E%3Crect width='100' height='100' fill='white'/%3E%3Ccircle cx='50' cy='50' r='13' fill='black'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)' fill='black'%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4' transform='rotate(45 50 50)'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4' transform='rotate(90 50 50)'/%3E%3Crect x='40' y='8' width='20' height='84' rx='4' transform='rotate(135 50 50)'/%3E%3C/g%3E%3C/svg%3E");
   animation: gear-spin 1.4s linear infinite;
+}
+
+/* For mode select */
+/* ========== Day / Night mode ========== */
+
+/* Navbar, Footer, Sidebar আর dark section-এ হালকা gradient */
+.bg-secondary {
+  background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+[data-theme="fixmate-dark"] .bg-secondary {
+  background-image: linear-gradient(135deg, #0b1230 0%, #1e1b4b 100%);
+}
+
+/* Hero video-র উপরের gradient overlay */
+.hero-overlay {
+  background: linear-gradient(
+    120deg,
+    rgba(15, 23, 42, 0.92) 0%,
+    rgba(15, 23, 42, 0.72) 50%,
+    rgba(194, 65, 12, 0.45) 100%
+  );
+}
+
+[data-theme="fixmate-dark"] .hero-overlay {
+  background: linear-gradient(
+    120deg,
+    rgba(8, 11, 30, 0.94) 0%,
+    rgba(30, 27, 75, 0.78) 50%,
+    rgba(91, 33, 182, 0.5) 100%
+  );
+}
+
+/* Night mode: কোডে সরাসরি লেখা রঙগুলো বদলানো */
+[data-theme="fixmate-dark"] .bg-white {
+  background-color: #111c33;
+}
+[data-theme="fixmate-dark"] .bg-slate-200 {
+  background-color: #243352;
+}
+[data-theme="fixmate-dark"] .border-slate-200 {
+  border-color: #243352;
+}
+[data-theme="fixmate-dark"] .hover\:bg-slate-100:hover {
+  background-color: #1e2b47;
+}
+[data-theme="fixmate-dark"] .hover\:bg-red-50:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme="fixmate-dark"] .text-secondary,
+[data-theme="fixmate-dark"] .text-slate-800,
+[data-theme="fixmate-dark"] .text-slate-700 {
+  color: #e2e8f0;
+}
+[data-theme="fixmate-dark"] .text-slate-600 {
+  color: #b6c2d4;
+}
+[data-theme="fixmate-dark"] .text-slate-500,
+[data-theme="fixmate-dark"] .section-subtitle {
+  color: #94a3b8;
+}
+
+/* badge-এর হালকা রঙ night mode-এ স্বচ্ছ রঙে */
+[data-theme="fixmate-dark"] .bg-orange-100,
+[data-theme="fixmate-dark"] .bg-orange-50 {
+  background-color: rgba(249, 115, 22, 0.18);
+}
+[data-theme="fixmate-dark"] .bg-blue-100 {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+[data-theme="fixmate-dark"] .bg-green-100 {
+  background-color: rgba(34, 197, 94, 0.2);
+}
+[data-theme="fixmate-dark"] .bg-amber-100,
+[data-theme="fixmate-dark"] .bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.2);
+}
+[data-theme="fixmate-dark"] .bg-red-100 {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+[data-theme="fixmate-dark"] .bg-indigo-100 {
+  background-color: rgba(99, 102, 241, 0.22);
+}
+[data-theme="fixmate-dark"] .bg-purple-100 {
+  background-color: rgba(168, 85, 247, 0.22);
+}
+
+[data-theme="fixmate-dark"] .text-orange-700,
+[data-theme="fixmate-dark"] .text-orange-600 {
+  color: #fdba74;
+}
+[data-theme="fixmate-dark"] .text-blue-700,
+[data-theme="fixmate-dark"] .text-blue-600 {
+  color: #93c5fd;
+}
+[data-theme="fixmate-dark"] .text-green-700,
+[data-theme="fixmate-dark"] .text-green-600 {
+  color: #86efac;
+}
+[data-theme="fixmate-dark"] .text-amber-700 {
+  color: #fcd34d;
+}
+[data-theme="fixmate-dark"] .text-red-700 {
+  color: #fca5a5;
+}
+[data-theme="fixmate-dark"] .text-indigo-700 {
+  color: #a5b4fc;
+}
+[data-theme="fixmate-dark"] .text-purple-700,
+[data-theme="fixmate-dark"] .text-purple-600 {
+  color: #d8b4fe;
 }

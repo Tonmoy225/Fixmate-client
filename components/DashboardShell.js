@@ -10,6 +10,8 @@ import { authClient } from "@/lib/auth-client";
 import { menuByRole } from "@/lib/dashboard-menu";
 import Logo from "./Logo";
 
+import ThemeToggle from "./ThemeToggle";
+
 const roleBadgeClass = {
   customer: "bg-blue-100 text-blue-700",
   technician: "bg-orange-100 text-orange-700",
@@ -41,7 +43,7 @@ export default function DashboardShell({ user: initialUser, children }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-base-200">
+        <div className="flex min-h-screen">
       {/* Mobile overlay */}
       {open && (
         <div
@@ -119,6 +121,7 @@ export default function DashboardShell({ user: initialUser, children }) {
           </div>
 
           <div className="flex items-center gap-3">
+                        <ThemeToggle />
             <div className="hidden text-right sm:block">
               <p className="font-bold leading-tight">{user.name}</p>
               <span

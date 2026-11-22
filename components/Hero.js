@@ -17,7 +17,7 @@ export default function Hero() {
       </video>
 
       {/* Dark overlay so the text is easy to read */}
-      <div className="absolute inset-0 bg-slate-900/75"></div>
+            <div className="hero-overlay absolute inset-0"></div>
 
       {/* Content */}
       <div className="container-page relative py-20 text-center">

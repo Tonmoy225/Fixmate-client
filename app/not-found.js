@@ -1,12 +1,16 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { FaTools, FaHome } from "react-icons/fa";
 import Navbar from "@/components/Navbar";
+import NavbarFallback from "@/components/NavbarFallback";
 import Footer from "@/components/Footer";
 
 export default function NotFound() {
   return (
     <>
-      <Navbar />
+      <Suspense fallback={<NavbarFallback />}>
+        <Navbar />
+      </Suspense>
       <main className="container-page flex min-h-[70vh] flex-col items-center justify-center py-16 text-center">
         {/* 404 লেখার মাঝের 0 এর জায়গায় tools আইকন */}
         <div className="flex items-center gap-2 text-8xl font-extrabold text-secondary md:text-9xl">

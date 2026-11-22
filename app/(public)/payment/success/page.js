@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { apiFetch } from "@/lib/api";
 
+import PageLoader from "@/components/PageLoader";
+
 function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
@@ -51,7 +53,7 @@ function SuccessContent() {
   if (!payment) {
     return (
       <div className="flex flex-col items-center gap-4 py-20">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
+        <PageLoader text="Confirming your payment..." />
         <p className="font-semibold text-slate-500">
           Confirming your payment...
         </p>

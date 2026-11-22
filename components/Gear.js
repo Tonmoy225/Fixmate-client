@@ -1,5 +1,9 @@
-// logo আর loader দুই জায়গায় এই gear-ই চলে। রঙ আসে text-color থেকে।
-export default function Gear({ className = "", maskId = "gear-hole" }) {
+export default function Gear({
+  className = "",
+  maskId = "gear-hole",
+  spin = null,
+  duration = 3,
+}) {
   return (
     <svg viewBox="0 0 100 100" fill="currentColor" className={className}>
       <defs>
@@ -17,18 +21,30 @@ export default function Gear({ className = "", maskId = "gear-hole" }) {
       </defs>
 
       <g mask={`url(#${maskId})`}>
-        <circle cx="50" cy="50" r="30" />
-        {[0, 45, 90, 135].map((angle) => (
-          <rect
-            key={angle}
-            x="40"
-            y="8"
-            width="20"
-            height="84"
-            rx="4"
-            transform={`rotate(${angle} 50 50)`}
-          />
-        ))}
+        <g>
+          {spin && (
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from={spin === "ccw" ? "360 50 50" : "0 50 50"}
+              to={spin === "ccw" ? "0 50 50" : "360 50 50"}
+              dur={`${duration}s`}
+              repeatCount="indefinite"
+            />
+          )}
+          <circle cx="50" cy="50" r="30" />
+          {[0, 45, 90, 135].map((angle) => (
+            <rect
+              key={angle}
+              x="40"
+              y="8"
+              width="20"
+              height="84"
+              rx="4"
+              transform={`rotate(${angle} 50 50)`}
+            />
+          ))}
+        </g>
       </g>
     </svg>
   );
