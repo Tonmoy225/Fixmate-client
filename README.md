@@ -4,18 +4,18 @@
 
 ## Live URLs
 
-- Live Site: [CLIENT_LIVE_URL](https://fixmate-client-iota.vercel.app/)
-- Client Repository: [CLIENT_GITHUB_URL](https://github.com/Tonmoy225/Fixmate-client)
-- Server Repository: [SERVER_GITHUB_URL](https://github.com/Tonmoy225/fixmate-server)
-- Server API: [SERVER_LIVE_URL](https://fixmate-server-beta.vercel.app/)
+- Live Site: [https://fixmate-client-iota.vercel.app/](https://fixmate-client-iota.vercel.app/)
+- Client Repository: [https://github.com/Tonmoy225/Fixmate-client](https://github.com/Tonmoy225/Fixmate-client)
+- Server Repository: [https://github.com/Tonmoy225/fixmate-server](https://github.com/Tonmoy225/fixmate-server)
+- Server API: [ttps://fixmate-server-beta.vercel.app/](https://fixmate-server-beta.vercel.app/)
 
 ## Test Accounts
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Admin | YOUR_ADMIN_EMAIL | YOUR_ADMIN_PASSWORD |
-| Technician | YOUR_TECHNICIAN_EMAIL | YOUR_TECHNICIAN_PASSWORD |
-| Customer | YOUR_CUSTOMER_EMAIL | YOUR_CUSTOMER_PASSWORD |
+| Admin | tonmoy@gmail.com | Tonmoy121 |
+| Technician | itonmoy92@gmail.com | Tonmoy121 |
+| Customer | istiar2@gmail.com | Tonmoy121 |
 
 Stripe test card: `4242 4242 4242 4242`, any future date, any CVC.
 
