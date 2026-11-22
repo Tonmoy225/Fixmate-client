@@ -6,16 +6,16 @@ import { MdPeople, MdEngineering, MdPendingActions } from "react-icons/md";
 import StatsCard from "@/components/dashboard/StatsCard";
 import { apiFetch } from "@/lib/api";
 
+
+import BookingsChart from "@/components/dashboard/BookingsChart";
+
 export default function AdminOverview() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
     apiFetch("/api/admin/stats")
       .then(setStats)
-      .catch((error) => {
-        toast.error(error.message);
-        setStats({ totalUsers: 0, totalTechnicians: 0, pendingServices: 0 });
-      });
+      .catch(setStats({ totalUsers: 0, totalTechnicians: 0, pendingServices: 0, bookingsByStatus: {} }));
   }, []);
 
   if (!stats) {
