@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FaUser, FaWrench } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaUser, FaWrench } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 import GoogleAuthButton from "@/components/GoogleAuthButton";
 
@@ -18,6 +18,7 @@ export default function SignUpPage() {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -154,14 +155,25 @@ export default function SignUpPage() {
           {/* Password */}
           <div>
             <label className="mb-1 block text-sm font-semibold">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="Min 6 chars, upper + lower case"
-              className="input input-bordered w-full"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                placeholder="Min 6 chars, upper + lower case"
+                className="input input-bordered w-full pr-12"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((value) => !value)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                title={showPassword ? "Hide password" : "Show password"}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-lg text-slate-500 transition-colors hover:text-primary"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
             {errors.password && (
               <p className="mt-1 text-sm text-error">{errors.password}</p>
             )}
