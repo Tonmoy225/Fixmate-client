@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FixMate
 
-## Getting Started
+**FixMate** is a full-stack, role-based repair service platform. Verified technicians list repair services (smartphone, laptop, AC, refrigerator, TV, washing machine, electrical), customers send repair requests and track each job step by step, and pay online only after the job is completed. Admins approve services, manage users and monitor revenue.
 
-First, run the development server:
+## Live URLs
+
+- Live Site: YOUR_CLIENT_LIVE_URL
+- Client Repository: YOUR_CLIENT_GITHUB_URL
+- Server Repository: YOUR_SERVER_GITHUB_URL
+- Server API: YOUR_SERVER_LIVE_URL
+
+## Test Accounts
+
+| Role | Email | Password |
+| --- | --- | --- |
+| Admin | YOUR_ADMIN_EMAIL | YOUR_ADMIN_PASSWORD |
+| Technician | YOUR_TECHNICIAN_EMAIL | YOUR_TECHNICIAN_PASSWORD |
+| Customer | YOUR_CUSTOMER_EMAIL | YOUR_CUSTOMER_PASSWORD |
+
+Stripe test card: `4242 4242 4242 4242`, any future date, any CVC.
+
+## Key Features
+
+- Responsive public website with a video hero banner, featured services, categories, how it works and testimonials
+- Sign up as Customer or Technician with validation (admin cannot be selected); sign in with redirect back to the page you wanted
+- Server-side search, filter, sort and pagination on Browse Services, kept in the URL so it survives a reload
+- Service details page and a role-restricted repair request form (duplicate active requests are blocked)
+- Three role-based dashboards with a collapsible sidebar, reusable stats cards and charts
+- Customer: My Bookings (cancel with confirmation), Stripe Pay Now, Payment History
+- Technician: Add Service with ImgBB image upload, My Services (edit, delete, availability toggle), Manage Requests with a status pipeline and final amount
+- Admin: Manage Users and roles, Service Approval, All Bookings, Transactions with total revenue
+- Update Profile for every role; the new name and photo appear instantly in the navbar and dashboard
+- Route protection on the server, so reloading any private page keeps you logged in
+- Custom loading state, 404 page, error boundary, toast notifications, empty states and confirmation modals
+
+## Tech Stack
+
+Next.js (App Router), Tailwind CSS, DaisyUI, BetterAuth (MongoDB adapter), JWT, Stripe, ImgBB, Express.js and MongoDB (server repository)
+
+## Environment Variables
+
+Copy `.env.local.example` to `.env.local` and fill in the values.
+
+| Name | Purpose |
+| --- | --- |
+| NEXT_PUBLIC_API_URL | Express server URL |
+| BETTER_AUTH_SECRET | BetterAuth secret |
+| BETTER_AUTH_URL | This site's URL |
+| TRUSTED_ORIGINS | Extra trusted origins for BetterAuth (production domain), comma separated |
+| MONGODB_URI | MongoDB connection string (same as the server) |
+| DB_NAME | Database name (same as the server) |
+| JWT_SECRET | JWT secret (must be the same as the server) |
+| IMGBB_API_KEY | ImgBB API key for image upload |
+
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. The server repository must be running as well.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## npm Packages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+next, react, react-dom, tailwindcss, daisyui, better-auth, mongodb, jsonwebtoken, react-hot-toast, react-icons, recharts
